@@ -1,40 +1,3 @@
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(event)
-        local nmap = function(keys, func, desc)
-            if desc then
-                desc = 'LSP: ' .. desc
-            end
-
-            vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-        end
-
-        nmap('K', vim.lsp.buf.hover)
-        -- nmap('<C-K>', vim.lsp.buf.signature_help)
-
-        nmap('gd', vim.lsp.buf.definition)
-        nmap('gD', vim.lsp.buf.declaration)
-        nmap('gi', vim.lsp.buf.implementation)
-        nmap('go', vim.lsp.buf.type_definition)
-        nmap('gr', require('telescope.builtin').lsp_references)
-        nmap('gs', vim.lsp.buf.signature_help)
-        nmap('gq', vim.lsp.buf.format)
-        nmap('gl', vim.diagnostic.open_float)
-
-        nmap('<leader>rn', vim.lsp.buf.rename)
-        nmap('<leader>ca', vim.lsp.buf.code_action)
-        nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols)
-        nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
-
-
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            vim.keymap.set('n', '<leader>th',
-                function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-                { buffer = bufnr })
-        end
-
-        vim.lsp.inlay_hint.enable(false)
-    end
-})
 
 require("lze").load {
     {
@@ -71,7 +34,7 @@ require("lze").load {
                 },
 
                 snippets = {
-                    preset = "luasnip"
+                    -- preset = "luasnip"
                 },
 
                 signature = {
@@ -117,6 +80,45 @@ require("lze").load {
             local lspconfig = require("lspconfig")
             local capabilities = blink.get_lsp_capabilities()
 
+            local add_inlay_hints = function (bufnr)
+                vim.keymap.set('n', '<leader>th',
+                    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+                    { buffer = bufnr }
+                )
+            end
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(event)
+                    local nmap = function(keys, func, desc)
+                        if desc then
+                            desc = 'LSP: ' .. desc
+                        end
+
+                        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+                    end
+
+                    nmap('K', vim.lsp.buf.hover)
+                    -- nmap('<C-K>', vim.lsp.buf.signature_help)
+
+                    nmap('gd', vim.lsp.buf.definition)
+                    nmap('gD', vim.lsp.buf.declaration)
+                    nmap('gi', vim.lsp.buf.implementation)
+                    nmap('go', vim.lsp.buf.type_definition)
+                    nmap('gr', require('telescope.builtin').lsp_references)
+                    nmap('gs', vim.lsp.buf.signature_help)
+                    nmap('gq', vim.lsp.buf.format)
+                    nmap('gl', vim.diagnostic.open_float)
+
+                    nmap('<leader>rn', vim.lsp.buf.rename)
+                    nmap('<leader>ca', vim.lsp.buf.code_action)
+                    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols)
+                    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
+
+                    -- disable inlay by default
+                    vim.lsp.inlay_hint.enable(false)
+                end
+            })
+
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
 
@@ -129,7 +131,7 @@ require("lze").load {
 
             lspconfig.gopls.setup({
                 on_attach = function(_, bufnr)
-                    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+                    add_inlay_hints(bufnr)
 
                     vim.api.nvim_create_autocmd('BufWritePre', {
                         pattern = "*.go",
@@ -170,6 +172,83 @@ require("lze").load {
                     }
                 }
             })
+
+            lspconfig.pylsp.setup({
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            -- formatter
+                            black = { enabled = true },
+                            autopep8 = { enabled = false },
+                            yapf = { enabled = false },
+                            -- linter
+                            ruff = {
+                                enabled = true,
+                                formatEnabled = true,
+                                extendSelect = { "ALL" },
+                                format = { "I" },
+                                extendIgnore = { "D", "ANN101", "ANN204" },
+                            },
+                            pylint = { enabled = false },
+                            pyflakes = { enabled = false },
+                            pycodestyle = { enabled = false },
+                            -- type checker
+                            pylsp_mypy = { enabled = true },
+                            -- auto-completion
+                            jedi_completion = { fuzzy = true },
+                            -- auto import
+                            rope_autoimport = { enabled = false },
+                            -- import sorting
+                            pyls_isort = { enabled = false }
+                        },
+                    },
+                },
+            })
+
+            lspconfig.rust_analyzer.setup({
+                on_attach = function(_, bufnr)
+                    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+                end,
+                settings = {
+                    ["rust-analyzer"] = {
+                        add_return_type = {
+                            enable = true,
+                        },
+                        inlayHints = {
+                            enable = true,
+                            showParameterName = true,
+                        },
+                    }
+                }
+            })
+
+
+            lspconfig.terraformls.setup({})
+            lspconfig.tflint.setup({})
+
+            lspconfig.dockerls.setup({})
+
+            lspconfig.jsonls.setup({})
+
+            lspconfig.nil_ls.setup({})
+
+            lspconfig.yamlls.setup {
+                schemas = {
+                    kubernetes = "*.yaml",
+                    ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+                    ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+                    ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+                    ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+                    ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+                    ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
+                    ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+                    ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+                    ["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
+                    ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+                    ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+                    ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
+                },
+            }
         end,
     }
 }
