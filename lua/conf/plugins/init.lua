@@ -14,4 +14,7 @@ end
 if nixCats("general.telescope") then
     require("conf.plugins.general.telescope")
 end
+if nixCats("general.markdown") then
+    require("conf.plugins.general.markdown")
+end
 
