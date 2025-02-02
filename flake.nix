@@ -160,7 +160,8 @@
 	    telescope-nvim
 	  ];
 	  markdown = with pkgs.vimPlugins; [
-
+        markdown-preview-nvim
+        markview-nvim
 	  ];
 	  extra = with pkgs.vimPlugins; [
 	    comment-nvim
