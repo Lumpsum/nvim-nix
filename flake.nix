@@ -126,6 +126,7 @@
 	  extra = [
 	    oil-nvim
 	    nvim-web-devicons
+        vim-tmux-navigator
 	  ];
 	};
 

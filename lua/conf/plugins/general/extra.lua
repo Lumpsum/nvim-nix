@@ -35,4 +35,11 @@ require("lze").load {
             require("todo-comments").setup()
         end
     },
+    {
+        "vim-tmux-navigator",
+        for_cat = cat,
+        event = "DeferredUIEnter",
+        after = function (plugin)
+        end
+    },
 }
