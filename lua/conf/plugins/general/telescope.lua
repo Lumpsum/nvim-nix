@@ -5,10 +5,10 @@ require("lze").load {
         cmd = { "Telescope", "LiveGrepGitRoot" },
         on_require = { "telescope", },
         keys = {
-            { "<leader>pf", mode = {"n"}, },
-            { "<leader>ps", mode = {"n"}, },
-            { "<leader>pg", mode = {"n"}, },
-            { "<leader>pd", mode = {"n"}, },
+            { "<leader>pf", mode = { "n" }, },
+            { "<leader>ps", mode = { "n" }, },
+            { "<leader>pg", mode = { "n" }, },
+            { "<leader>pd", mode = { "n" }, },
         },
         load = function(name)
             vim.cmd.packadd(name)
@@ -17,13 +17,19 @@ require("lze").load {
         end,
         after = function(plugin)
             require("telescope").setup({
-                -- pickers = {
-                --     find_files = {
-                --         find_files = {
-                --             theme = "dropdown"
-                --         }
-                --     }
-                -- }
+                -- default = {
+                --     hidden = true,
+                --     no_ignore = true,
+                -- },
+                pickers = {
+                    find_files = {
+                        -- hidden = true,
+                        -- no_ignore = true,
+                        --         find_files = {
+                        --             theme = "dropdown"
+                        --         }
+                    }
+                },
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown()
