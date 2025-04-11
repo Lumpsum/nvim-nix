@@ -232,6 +232,10 @@ require("lze").load {
 
             lspconfig.nil_ls.setup({})
 
+            lspconfig.cue.setup({
+                cmd = { "cuelsp" }
+            })
+
             lspconfig.yamlls.setup {
                 schemas = {
                     kubernetes = "*.yaml",

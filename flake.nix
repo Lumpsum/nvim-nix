@@ -130,10 +130,10 @@
 	  ];
 	};
 
-	themer = with pkgs.vimPlugins;
-	  (builtins.getAttr (categories.colorscheme or "kanagawa") {
-	    "onedark" = onedark-nvim;
-	    "kanagawa" = kanagawa-nvim;
+	themer = (builtins.getAttr (categories.colorscheme or "kanagawa") {
+	    "onedark" = pkgs.vimPLugins.onedark-nvim;
+	    "kanagawa" = pkgs.vimPlugins.kanagawa-nvim;
+        "ashen" = pkgs.callPackage ./ashen-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
 	  }
 	);
       };
@@ -249,9 +249,9 @@
         # (and other information to pass to lua)
         categories = {
           general = true;
-	  lsp = true;
-	  themer = true;
-	  colorscheme = "kanagawa";
+          lsp = true;
+          themer = true;
+          colorscheme = "ashen";
         };
       };
     };
