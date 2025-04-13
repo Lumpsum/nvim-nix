@@ -251,7 +251,7 @@
           general = true;
           lsp = true;
           themer = true;
-          colorscheme = "ashen";
+          colorscheme = "kanagawa";
         };
       };
     };
