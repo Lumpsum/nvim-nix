@@ -36,6 +36,10 @@ require("oil").setup({
         "permissions",
         "size",
     },
+    keymaps = {
+        ["<C-l>"] = false,
+        ["<C-r>"] = "actions.refresh",
+    }
 })
 
 require("lze").load {
