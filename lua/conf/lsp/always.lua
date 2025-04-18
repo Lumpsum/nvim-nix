@@ -230,7 +230,15 @@ require("lze").load {
 
             lspconfig.jsonls.setup({})
 
-            lspconfig.nil_ls.setup({})
+            lspconfig.nil_ls.setup({
+                settings = {
+                    ["nil"] = {
+                        formatting = {
+                            command = { "nixfmt" },
+                        }
+                    }
+                }
+            })
 
             lspconfig.cue.setup({
                 cmd = { "cuelsp" }
