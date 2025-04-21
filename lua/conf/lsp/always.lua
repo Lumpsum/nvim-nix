@@ -1,4 +1,3 @@
-
 require("lze").load {
     {
         "friendly-snippets",
@@ -8,6 +7,12 @@ require("lze").load {
     },
     {
         "luasnip",
+        for_cat = "lsp.always",
+        event = "DeferredUIEnter",
+        dep_of = { "blink.cmp" },
+    },
+    {
+        "lazydev.nvim",
         for_cat = "lsp.always",
         event = "DeferredUIEnter",
         dep_of = { "blink.cmp" },
@@ -30,8 +35,17 @@ require("lze").load {
                 },
 
                 sources = {
-                    default = { "lsp", "path", "snippets", "buffer" }
+                    default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+                    providers = {
+                        lazydev = {
+                            name = "LazyDev",
+                            module = "lazydev.integrations.blink",
+                            -- make lazydev completions top priority (see `:h blink.cmp`)
+                            score_offset = 100,
+                        },
+                    },
                 },
+
 
                 snippets = {
                     -- preset = "luasnip"
@@ -40,6 +54,15 @@ require("lze").load {
                 signature = {
                     enabled = true,
                     window = { border = 'single' }
+                },
+
+                cmdline = {
+                    enabled = true,
+                    completion = {
+                        menu = {
+                            auto_show = true,
+                        },
+                    },
                 },
 
                 completion = {
@@ -80,7 +103,7 @@ require("lze").load {
             local lspconfig = require("lspconfig")
             local capabilities = blink.get_lsp_capabilities()
 
-            local add_inlay_hints = function (bufnr)
+            local add_inlay_hints = function(bufnr)
                 vim.keymap.set('n', '<leader>th',
                     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
                     { buffer = bufnr }

@@ -143,6 +143,7 @@
               always = [
                 lze
                 plenary-nvim
+                nvim-nio
               ];
               extra = [
                 oil-nvim
@@ -186,6 +187,12 @@
                 markdown-preview-nvim
                 markview-nvim
               ];
+              dap = with pkgs.vimPlugins; [
+                nvim-dap
+                nvim-dap-ui
+                nvim-dap-go
+                nvim-dap-virtual-text
+              ];
               extra = with pkgs.vimPlugins; [
                 comment-nvim
                 grapple-nvim
@@ -200,6 +207,7 @@
                 blink-cmp
                 lsp-zero-nvim
                 nvim-lspconfig
+                lazydev-nvim
               ];
             };
           };

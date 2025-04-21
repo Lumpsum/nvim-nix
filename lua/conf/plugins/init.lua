@@ -17,4 +17,7 @@ end
 if nixCats("general.markdown") then
     require("conf.plugins.general.markdown")
 end
+if nixCats("general.dap") then
+    require("conf.plugins.general.dap")
+end
 
