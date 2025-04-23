@@ -103,6 +103,8 @@ require("lze").load {
             local lspconfig = require("lspconfig")
             local capabilities = blink.get_lsp_capabilities()
 
+            vim.diagnostic.config({virtual_text = true})
+
             local add_inlay_hints = function(bufnr)
                 vim.keymap.set('n', '<leader>th',
                     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
