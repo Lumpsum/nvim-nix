@@ -191,6 +191,7 @@
                 nvim-dap
                 nvim-dap-ui
                 nvim-dap-go
+                nvim-dap-python
                 nvim-dap-virtual-text
               ];
               extra = with pkgs.vimPlugins; [
