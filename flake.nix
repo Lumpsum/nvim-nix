@@ -121,20 +121,20 @@
               lazygit
             ];
             debug = with pkgs; {
-              go = [ delv ];
+              # go = [ delv ];
             };
-            go = with pkgs; [
-              gopls
-              gotools
-              go-tools
-              gccgo
-            ];
-            nix = with pkgs.vimPlugins; [
-              vim-nix
-            ];
-            neonixdev = {
-              inherit (pkgs) nix-doc lua-language-server nixd;
-            };
+            # go = with pkgs; [
+            #   gopls
+            #   gotools
+            #   go-tools
+            #   gccgo
+            # ];
+            # nix = with pkgs.vimPlugins; [
+            #   vim-nix
+            # ];
+            # neonixdev = {
+            #   inherit (pkgs) nix-doc lua-language-server nixd nil;
+            # };
           };
 
           # This is for plugins that will load at startup without using packadd:
@@ -193,6 +193,7 @@
                 nvim-dap-go
                 nvim-dap-python
                 nvim-dap-virtual-text
+                nvim-dap-python
               ];
               extra = with pkgs.vimPlugins; [
                 comment-nvim
@@ -209,6 +210,7 @@
                 lsp-zero-nvim
                 nvim-lspconfig
                 lazydev-nvim
+                rustaceanvim
               ];
             };
           };
@@ -282,6 +284,8 @@
               general = true;
               lsp = true;
               nix = true;
+              neonixdev = true;
+              dapRegular = true;
               themer = true;
               colorscheme = "kanagawa";
             };

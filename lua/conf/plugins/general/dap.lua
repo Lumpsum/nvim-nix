@@ -6,22 +6,6 @@ require("lze").load {
         dep_of = { "nvim-dap" },
     },
     {
-        "nvim-dap-go",
-        for_cat = "lsp.always",
-        event = "DeferredUIEnter",
-        after = function(plugin)
-            require("dap-go").setup({})
-        end
-    },
-    {
-        "nvim-dap-python",
-        for_cat = "lsp.always",
-        event = "DeferredUIEnter",
-        after = function(plugin)
-            require("dap-python").setup("uv")
-        end
-    },
-    {
         "nvim-dap-virtual-text",
         for_cat = "lsp.always",
         event = "DeferredUIEnter",
@@ -74,5 +58,21 @@ require("lze").load {
                 text.refresh()
             end
         end,
+    },
+    {
+        "nvim-dap-go",
+        for_cat = "lsp.always",
+        ft = "go",
+        after = function(plugin)
+            require("dap-go").setup({})
+        end
+    },
+    {
+        "nvim-dap-python",
+        for_cat = "lsp.always",
+        ft = "python",
+        after = function(plugin)
+            require("dap-python").setup("uv")
+        end
     }
 }

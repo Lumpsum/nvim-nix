@@ -1,5 +1,10 @@
 require("lze").load {
     {
+        "rustaceanvim",
+        for_cat = "lsp.always",
+        event = "DeferredUIEnter",
+    },
+    {
         "friendly-snippets",
         for_cat = "lsp.always",
         event = "DeferredUIEnter",
@@ -230,22 +235,22 @@ require("lze").load {
                 },
             })
 
-            lspconfig.rust_analyzer.setup({
-                on_attach = function(_, bufnr)
-                    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-                end,
-                settings = {
-                    ["rust-analyzer"] = {
-                        add_return_type = {
-                            enable = true,
-                        },
-                        inlayHints = {
-                            enable = true,
-                            showParameterName = true,
-                        },
-                    }
-                }
-            })
+            -- lspconfig.rust_analyzer.setup({
+            --     on_attach = function(_, bufnr)
+            --         vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+            --     end,
+            --     settings = {
+            --         ["rust-analyzer"] = {
+            --             add_return_type = {
+            --                 enable = true,
+            --             },
+            --             inlayHints = {
+            --                 enable = true,
+            --                 showParameterName = true,
+            --             },
+            --         }
+            --     }
+            -- })
 
 
             lspconfig.terraformls.setup({})
@@ -255,9 +260,19 @@ require("lze").load {
 
             lspconfig.jsonls.setup({})
 
-            lspconfig.nil_ls.setup({
+            -- lspconfig.nil_ls.setup({
+            --     settings = {
+            --         ["nil"] = {
+            --             formatting = {
+            --                 command = { "nixfmt" },
+            --             }
+            --         }
+            --     }
+            -- })
+
+            lspconfig.nixd.setup({
                 settings = {
-                    ["nil"] = {
+                    nixd = {
                         formatting = {
                             command = { "nixfmt" },
                         }
