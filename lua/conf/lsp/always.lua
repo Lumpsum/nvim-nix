@@ -108,17 +108,18 @@ require("lze").load {
             local lspconfig = require("lspconfig")
             local capabilities = blink.get_lsp_capabilities()
 
-            vim.diagnostic.config({virtual_text = true})
+            vim.diagnostic.config({ virtual_text = true })
 
-            local add_inlay_hints = function(bufnr)
-                vim.keymap.set('n', '<leader>th',
-                    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-                    { buffer = bufnr }
-                )
-            end
+            -- local add_inlay_hints = function(bufnr)
+            --     vim.keymap.set('n', '<leader>th',
+            --         function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+            --         { buffer = bufnr }
+            --     )
+            -- end
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
+                    local client = vim.lsp.get_client_by_id(event.data.client_id)
                     local nmap = function(keys, func, desc)
                         if desc then
                             desc = 'LSP: ' .. desc
@@ -144,8 +145,12 @@ require("lze").load {
                     nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols)
                     nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
 
-                    -- disable inlay by default
-                    vim.lsp.inlay_hint.enable(false)
+                    if client.server_capabilities.inlayHintProvider then
+                        nmap('<leader>th', function()
+                            local current_setting = vim.lsp.inlay_hint.is_enabled(bufnr)
+                            vim.lsp.inlay_hint.enable(not current_setting, {bufnr})
+                        end)
+                    end
                 end
             })
 
@@ -161,7 +166,7 @@ require("lze").load {
 
             lspconfig.gopls.setup({
                 on_attach = function(_, bufnr)
-                    add_inlay_hints(bufnr)
+                    -- add_inlay_hints(bufnr)
 
                     vim.api.nvim_create_autocmd('BufWritePre', {
                         pattern = "*.go",
