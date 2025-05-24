@@ -154,9 +154,9 @@
 
             themer = (
               builtins.getAttr (categories.colorscheme or "kanagawa") {
-                "onedark" = pkgs.vimPLugins.onedark-nvim;
                 "kanagawa" = pkgs.vimPlugins.kanagawa-nvim;
                 "ashen" = pkgs.callPackage ./ashen-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
+                "monoglow" = pkgs.callPackage ./monoglow-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
               }
             );
           };
@@ -287,7 +287,7 @@
               neonixdev = true;
               dapRegular = true;
               themer = true;
-              colorscheme = "kanagawa";
+              colorscheme = "monoglow";
             };
           };
       };
