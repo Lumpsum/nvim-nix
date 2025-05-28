@@ -15,7 +15,7 @@ require("lze").load {
         after = function(plugin)
             vim.keymap.set("n", "<leader>mt", function()
                 require("markview").commands.toggle()
-            end, { buffer = 0 })
+            end)
         end
     },
 }
