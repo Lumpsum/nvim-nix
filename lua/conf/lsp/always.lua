@@ -289,6 +289,16 @@ require("lze").load {
                 cmd = { "cuelsp" }
             })
 
+            lspconfig.helm_ls.setup({
+                settings = {
+                    helm_ls = {
+                        yamlls = {
+                            path = "yaml-language-server"
+                        },
+                    },
+                },
+            })
+
             lspconfig.yamlls.setup {
                 schemas = {
                     kubernetes = "*.yaml",

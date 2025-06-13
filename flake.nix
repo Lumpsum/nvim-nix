@@ -139,16 +139,19 @@
 
           # This is for plugins that will load at startup without using packadd:
           startupPlugins = {
-            general = with pkgs.vimPlugins; {
-              always = [
+            general = {
+              always = with pkgs.vimPlugins; [
                 lze
                 plenary-nvim
                 nvim-nio
               ];
-              extra = [
+              extra = with pkgs.vimPlugins; [
                 oil-nvim
                 nvim-web-devicons
                 vim-tmux-navigator
+              ];
+              custom = [
+                (pkgs.callPackage ./helm-ls.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; })
               ];
             };
 
