@@ -208,54 +208,75 @@ require("lze").load {
                 }
             })
 
-            lspconfig.pylsp.setup({
+            lspconfig.basedpyright.setup({
                 settings = {
-                    pylsp = {
-                        plugins = {
-                            -- formatter
-                            black = { enabled = true },
-                            autopep8 = { enabled = false },
-                            yapf = { enabled = false },
-                            -- linter
-                            ruff = {
-                                enabled = true,
-                                formatEnabled = true,
-                                extendSelect = { "ALL" },
-                                format = { "I" },
-                                extendIgnore = { "D", "ANN101", "ANN204" },
-                            },
-                            pylint = { enabled = false },
-                            pyflakes = { enabled = false },
-                            pycodestyle = { enabled = false },
-                            -- type checker
-                            pylsp_mypy = { enabled = true },
-                            -- auto-completion
-                            jedi_completion = { fuzzy = true },
-                            -- auto import
-                            rope_autoimport = { enabled = false },
-                            -- import sorting
-                            pyls_isort = { enabled = false }
+                    basedpyright = {
+                        disableOrganizeImports = true
+                    },
+                    python = {
+                        analysis = {
+                            ignore = { "*" },
                         },
                     },
                 },
             })
 
-            -- lspconfig.rust_analyzer.setup({
-            --     on_attach = function(_, bufnr)
-            --         vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-            --     end,
+            lspconfig.ruff.setup({
+                init_options = {
+                    settings = {
+
+                    },
+                },
+            })
+
+            -- lspconfig.pylsp.setup({
             --     settings = {
-            --         ["rust-analyzer"] = {
-            --             add_return_type = {
-            --                 enable = true,
+            --         pylsp = {
+            --             plugins = {
+            --                 -- formatter
+            --                 black = { enabled = true },
+            --                 autopep8 = { enabled = false },
+            --                 yapf = { enabled = false },
+            --                 -- linter
+            --                 ruff = {
+            --                     enabled = true,
+            --                     formatEnabled = true,
+            --                     extendSelect = { "ALL" },
+            --                     format = { "I" },
+            --                     extendIgnore = { "D", "ANN101", "ANN204" },
+            --                 },
+            --                 pylint = { enabled = false },
+            --                 pyflakes = { enabled = false },
+            --                 pycodestyle = { enabled = false },
+            --                 -- type checker
+            --                 pylsp_mypy = { enabled = true },
+            --                 -- auto-completion
+            --                 jedi_completion = { fuzzy = true },
+            --                 -- auto import
+            --                 rope_autoimport = { enabled = false },
+            --                 -- import sorting
+            --                 pyls_isort = { enabled = false }
             --             },
-            --             inlayHints = {
-            --                 enable = true,
-            --                 showParameterName = true,
-            --             },
-            --         }
-            --     }
+            --         },
+            --     },
             -- })
+
+            lspconfig.rust_analyzer.setup({
+                on_attach = function(_, bufnr)
+                    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+                end,
+                settings = {
+                    ["rust-analyzer"] = {
+                        add_return_type = {
+                            enable = true,
+                        },
+                        inlayHints = {
+                            enable = true,
+                            showParameterName = true,
+                        },
+                    }
+                }
+            })
 
 
             lspconfig.terraformls.setup({})
