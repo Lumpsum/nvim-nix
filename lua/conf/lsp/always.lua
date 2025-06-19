@@ -110,13 +110,6 @@ require("lze").load {
 
             vim.diagnostic.config({ virtual_text = true })
 
-            -- local add_inlay_hints = function(bufnr)
-            --     vim.keymap.set('n', '<leader>th',
-            --         function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-            --         { buffer = bufnr }
-            --     )
-            -- end
-
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -148,10 +141,19 @@ require("lze").load {
                     if client.server_capabilities.inlayHintProvider then
                         nmap('<leader>th', function()
                             local current_setting = vim.lsp.inlay_hint.is_enabled(bufnr)
-                            vim.lsp.inlay_hint.enable(not current_setting, {bufnr})
+                            vim.lsp.inlay_hint.enable(not current_setting, { bufnr })
                         end)
                     end
-                end
+
+                    local client = vim.lsp.get_client_by_id(event.data.client_id)
+                    if client == nil then
+                        return
+                    end
+                    if client.name == 'ruff' then
+                        -- Disable hover in favor of Pyright
+                        client.server_capabilities.hoverProvider = false
+                    end
+                end,
             })
 
             lspconfig.lua_ls.setup({
@@ -224,7 +226,11 @@ require("lze").load {
             lspconfig.ruff.setup({
                 init_options = {
                     settings = {
-
+                        lint = {
+                            ignore = { "D", "ANN101", "ANN204" },
+                            extendSelect = { "ALL" },
+                        }
+                        -- format = { "I" },
                     },
                 },
             })

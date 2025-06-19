@@ -29,7 +29,7 @@ require("lze").load {
                 },
 
                 indent = {
-                    enable = false,
+                    enable = true,
                 },
 
                 ignore_install = {},

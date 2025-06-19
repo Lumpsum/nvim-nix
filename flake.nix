@@ -290,7 +290,7 @@
               neonixdev = true;
               dapRegular = true;
               themer = true;
-              colorscheme = "monoglow";
+              colorscheme = "kanagawa";
             };
           };
       };
