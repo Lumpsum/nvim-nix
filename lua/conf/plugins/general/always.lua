@@ -87,3 +87,12 @@ require("lze").load {
         end
     }
 }
+
+-- vim.wo.foldmethod = "expr"
+-- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.wo.foldtext = ""
+
+-- vim.o.foldlevel = 99
+-- vim.o.foldlevelstart = 1
+-- vim.o.foldnestmax = 4
+-- vim.o.foldcolumn = "0"
