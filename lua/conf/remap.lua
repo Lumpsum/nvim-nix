@@ -15,6 +15,14 @@ vim.keymap.set('n', '-', "<CMD>Oil<CR>")
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+-- Folding
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldnestmax = 4
+
 -- Move to previous/next
 map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
 map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
