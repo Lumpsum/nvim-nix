@@ -30,6 +30,7 @@ require("lze").load {
 
                 indent = {
                     enable = true,
+                    disable = {"yaml"},
                 },
 
                 ignore_install = {},
