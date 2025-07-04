@@ -28,6 +28,14 @@ require("lze").load {
         end
     },
     {
+        "gitsigns.nvim",
+        for_cat = cat,
+        event = "DeferredUIEnter",
+        after = function (plugin)
+            require("gitsigns").setup()
+        end
+    },
+    {
         "todo-comments.nvim",
         for_cat = cat,
         event = "DeferredUIEnter",

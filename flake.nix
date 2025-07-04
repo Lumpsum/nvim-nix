@@ -202,6 +202,7 @@
                 comment-nvim
                 grapple-nvim
                 lazygit-nvim
+                gitsigns-nvim
                 todo-comments-nvim
               ];
             };
