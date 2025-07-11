@@ -152,6 +152,7 @@
               ];
               custom = [
                 (pkgs.callPackage ./helm-ls.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; })
+                (pkgs.callPackage ./nvim-json-graph-view.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; })
               ];
             };
 

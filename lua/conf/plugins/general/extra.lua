@@ -114,4 +114,12 @@ require("lze").load {
         after = function(plugin)
         end
     },
+    {
+        "json_graph_view",
+        for_cat = cat,
+        event = "DeferredUIEnter",
+        after = function(plugin)
+            require("json_graph_view")
+        end
+    },
 }
