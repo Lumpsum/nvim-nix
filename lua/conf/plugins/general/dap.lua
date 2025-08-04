@@ -70,7 +70,8 @@ require("lze").load {
     {
         "nvim-dap-python",
         for_cat = "lsp.always",
-        ft = "python",
+        -- ft = "python",
+        event = "DeferredUIEnter",
         after = function(plugin)
             require("dap-python").setup("uv")
         end
