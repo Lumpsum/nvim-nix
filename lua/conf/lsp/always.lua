@@ -122,7 +122,7 @@ require("lze").load {
                     end
 
                     nmap('K', vim.lsp.buf.hover)
-                    -- nmap('<C-K>', vim.lsp.buf.signature_help)
+                    nmap('<C-K>', vim.lsp.buf.signature_help)
 
                     nmap('gd', vim.lsp.buf.definition)
                     nmap('gD', vim.lsp.buf.declaration)
@@ -145,10 +145,10 @@ require("lze").load {
                         end)
                     end
 
-                    local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if client == nil then
                         return
                     end
+
                     if client.name == 'ruff' then
                         -- Disable hover in favor of Pyright
                         client.server_capabilities.hoverProvider = false
@@ -213,9 +213,7 @@ require("lze").load {
             lspconfig.basedpyright.setup({
                 settings = {
                     basedpyright = {
-                        disableOrganizeImports = true
-                    },
-                    python = {
+                        disableOrganizeImports = false,
                         analysis = {
                             ignore = { "*" },
                         },
@@ -227,10 +225,11 @@ require("lze").load {
                 init_options = {
                     settings = {
                         lint = {
-                            ignore = { "D", "ANN101", "ANN204" },
-                            extendSelect = { "ALL" },
-                        }
-                        -- format = { "I" },
+                            enable = true,
+                            select = { "ALL" },
+                            -- ignore = { "D", "ANN101", "ANN204" },
+                        },
+                        organizeImports = false,
                     },
                 },
             })
