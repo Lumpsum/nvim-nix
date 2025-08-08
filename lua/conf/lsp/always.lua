@@ -266,22 +266,22 @@ require("lze").load {
             --     },
             -- })
 
-            lspconfig.rust_analyzer.setup({
-                on_attach = function(_, bufnr)
-                    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-                end,
-                settings = {
-                    ["rust-analyzer"] = {
-                        add_return_type = {
-                            enable = true,
-                        },
-                        inlayHints = {
-                            enable = true,
-                            showParameterName = true,
-                        },
-                    }
-                }
-            })
+            -- lspconfig.rust_analyzer.setup({
+            --     on_attach = function(_, bufnr)
+            --         vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+            --     end,
+            --     settings = {
+            --         ["rust-analyzer"] = {
+            --             add_return_type = {
+            --                 enable = true,
+            --             },
+            --             inlayHints = {
+            --                 enable = true,
+            --                 showParameterName = true,
+            --             },
+            --         }
+            --     }
+            -- })
 
 
             lspconfig.terraformls.setup({})
