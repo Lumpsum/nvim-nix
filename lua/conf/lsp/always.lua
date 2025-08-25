@@ -122,7 +122,7 @@ require("lze").load {
                     end
 
                     nmap('K', vim.lsp.buf.hover)
-                    nmap('<C-K>', vim.lsp.buf.signature_help)
+                    nmap('gk', vim.lsp.buf.signature_help)
 
                     nmap('gd', vim.lsp.buf.definition)
                     nmap('gD', vim.lsp.buf.declaration)
