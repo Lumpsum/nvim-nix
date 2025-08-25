@@ -41,7 +41,7 @@ require("lze").load {
             vim.keymap.set("n", "<leader>do", dap.step_out)
             vim.keymap.set("n", "<leader>db", dap.step_back)
             vim.keymap.set("n", "<leader>dr", dap.restart)
-
+            vim.keymap.set("n", "<leader>dt", ui.toggle)
 
             dap.listeners.before.attach.dapui_config = function()
                 ui.open()
