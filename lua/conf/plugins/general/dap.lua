@@ -17,7 +17,7 @@ require("lze").load {
         "nvim-nio",
         for_cat = "lsp.always",
         event = "DeferredUIEnter",
-        dep_of = { "nvim-dap" },
+        dep_of = { "nvim-dap", "neotest" },
         after = function(plugin)
         end
     },
@@ -41,7 +41,7 @@ require("lze").load {
             vim.keymap.set("n", "<leader>do", dap.step_out)
             vim.keymap.set("n", "<leader>db", dap.step_back)
             vim.keymap.set("n", "<leader>dr", dap.restart)
-            vim.keymap.set("n", "<leader>dt", ui.toggle)
+            vim.keymap.set("n", "<leader>du", ui.toggle)
 
             dap.listeners.before.attach.dapui_config = function()
                 ui.open()
@@ -69,11 +69,44 @@ require("lze").load {
     },
     {
         "nvim-dap-python",
-        for_cat = "lsp.always",
-        -- ft = "python",
+        ft = "python",
         event = "DeferredUIEnter",
         after = function(plugin)
             require("dap-python").setup("uv")
+        end
+    },
+    {
+        "neotest-python",
+        ft = "python",
+        event = "DeferredUIEnter",
+        dep_of = { "neotest" },
+        after = function(plugin)
+        end
+    },
+    {
+        "neotest-go",
+        ft = "go",
+        event = "DeferredUIEnter",
+        dep_of = { "neotest" },
+        after = function(plugin)
+        end
+    },
+    {
+        "neotest",
+        for_cat = "lsp.always",
+        event = "DeferredUIEnter",
+        after = function(plugin)
+            local neotest = require("neotest")
+            neotest.setup({
+                adapters = {
+                    require("neotest-python"),
+                    require("neotest-go")
+                }
+            })
+
+            vim.keymap.set("n", "<leader>dtr", neotest.run.run)
+            vim.keymap.set("n", "<leader>dts", neotest.summary.toggle)
+            vim.keymap.set("n", "<leader>dtd", function () neotest.run.run({strategy="dap"}) end)
         end
     }
 }

@@ -176,11 +176,6 @@
               treesitter = with pkgs.vimPlugins; [
                 nvim-treesitter-textobjects
                 nvim-treesitter.withAllGrammars
-                #   (nvim-treesitter.withPlugins (
-                #     plugins: with plugins; [
-                #
-                #     ]
-                #   ))
               ];
               telescope = with pkgs.vimPlugins; [
                 telescope-fzf-native-nvim
@@ -197,6 +192,12 @@
                 nvim-dap-go
                 nvim-dap-virtual-text
                 nvim-dap-python
+
+                # Neotest requirements 
+                neotest
+                neotest-python
+                neotest-go
+                FixCursorHold-nvim
               ];
               extra = with pkgs.vimPlugins; [
                 comment-nvim
