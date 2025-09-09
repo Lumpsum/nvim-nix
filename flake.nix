@@ -161,6 +161,7 @@
                 "kanagawa" = pkgs.vimPlugins.kanagawa-nvim;
                 "ashen" = pkgs.callPackage ./ashen-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
                 "monoglow" = pkgs.callPackage ./monoglow-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
+                "gruvbox" = pkgs.vimPlugins.gruvbox;
               }
             );
           };
@@ -292,7 +293,7 @@
               neonixdev = true;
               dapRegular = true;
               themer = true;
-              colorscheme = "kanagawa";
+              colorscheme = "gruvbox";
             };
           };
       };
