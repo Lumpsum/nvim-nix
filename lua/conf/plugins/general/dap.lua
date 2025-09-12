@@ -100,7 +100,8 @@ require("lze").load {
             neotest.setup({
                 adapters = {
                     require("neotest-python"),
-                    require("neotest-go")
+                    require("neotest-go"),
+                    require("rustaceanvim.neotest")
                 }
             })
 

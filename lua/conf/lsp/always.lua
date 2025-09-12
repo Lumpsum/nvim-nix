@@ -3,6 +3,9 @@ require("lze").load {
         "rustaceanvim",
         for_cat = "lsp.always",
         event = "DeferredUIEnter",
+        dep_of = { "neotest" },
+        after = function(plugin)
+        end
     },
     {
         "friendly-snippets",
