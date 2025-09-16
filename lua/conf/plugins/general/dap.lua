@@ -30,7 +30,9 @@ require("lze").load {
             local dap, ui, text = require("dap"), require("dapui"), require("nvim-dap-virtual-text")
 
             ui.setup()
-            text.setup()
+            text.setup({
+                enabled = false,
+            })
 
             vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
             vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)
@@ -41,13 +43,24 @@ require("lze").load {
             vim.keymap.set("n", "<leader>do", dap.step_out)
             vim.keymap.set("n", "<leader>db", dap.step_back)
             vim.keymap.set("n", "<leader>dr", dap.restart)
-            vim.keymap.set("n", "<leader>du", ui.toggle)
+
+            vim.keymap.set("n", "<leader>dus", function ()
+                ui.toggle(1)
+            end)
+            vim.keymap.set("n", "<leader>dub", function ()
+                ui.toggle(2)
+            end)
+            vim.keymap.set("n", "<leader>dp", function ()
+                ui.float_element("breakpoints")
+            end)
+            vim.keymap.set("n", "<leader>de", ui.eval)
+            vim.keymap.set("v", "<leader>de", ui.eval)
 
             dap.listeners.before.attach.dapui_config = function()
-                ui.open()
+                ui.open(2)
             end
             dap.listeners.before.launch.dapui_config = function()
-                ui.open()
+                ui.open(2)
             end
             dap.listeners.before.event_terminated.dapui_config = function()
                 ui.close()
@@ -107,7 +120,7 @@ require("lze").load {
 
             vim.keymap.set("n", "<leader>dtr", neotest.run.run)
             vim.keymap.set("n", "<leader>dts", neotest.summary.toggle)
-            vim.keymap.set("n", "<leader>dtd", function () neotest.run.run({strategy="dap"}) end)
+            vim.keymap.set("n", "<leader>dtd", function() neotest.run.run({ strategy = "dap" }) end)
         end
     }
 }
