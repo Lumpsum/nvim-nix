@@ -12,8 +12,8 @@ vim.keymap.set('t', '<C-k>', [[<C-\><C-n>]])
 
 vim.keymap.set('n', '-', "<CMD>Oil<CR>")
 
-vim.keymap.set("n", "<C-->", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-vim.keymap.set("n", "<C-=>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+vim.keymap.set("n", "<C-->", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+vim.keymap.set("n", "<C-=>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 vim.keymap.set("n", "<C-+>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 vim.keymap.set("n", "<C-_>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 
