@@ -60,6 +60,7 @@
       extra_pkg_config = {
         # allowUnfree = true;
       };
+
       # management of the system variable is one of the harder parts of using flakes.
 
       # so I have done it here in an interesting way to keep it out of the way.
@@ -82,6 +83,7 @@
           # use `pkgs.neovimPlugins`, which is a set of our plugins.
           (utils.standardPluginOverlay inputs)
           # add any other flake overlays here.
+          # neovim-overlay
 
           # when other people mess up their overlays by wrapping them with system,
           # you may instead call this function on their overlay.
@@ -107,7 +109,7 @@
         {
           # to define and use a new category, simply add a new list to a set here,
           # and later, you will include categoryname = true; in the set you
-          # provide when you build the package using this builder function.
+          # provide when you build the package using this builder function.flake.nix
           # see :help nixCats.flake.outputs.packageDefinitions for info on that section.
 
           # lspsAndRuntimeDeps:
@@ -160,7 +162,9 @@
               builtins.getAttr (categories.colorscheme or "kanagawa") {
                 "kanagawa" = pkgs.vimPlugins.kanagawa-nvim;
                 "ashen" = pkgs.callPackage ./ashen-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
-                "monoglow" = pkgs.callPackage ./monoglow-nvim.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; };
+                "monoglow" = pkgs.callPackage ./monoglow-nvim.nix {
+                  buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
+                };
                 "gruvbox" = pkgs.vimPlugins.gruvbox;
               }
             );
@@ -175,8 +179,8 @@
                 mini-nvim
               ];
               treesitter = with pkgs.vimPlugins; [
-                nvim-treesitter-textobjects
                 nvim-treesitter.withAllGrammars
+                nvim-treesitter-textobjects
               ];
               telescope = with pkgs.vimPlugins; [
                 telescope-fzf-native-nvim
@@ -187,19 +191,42 @@
                 markdown-preview-nvim
                 markview-nvim
               ];
-              dap = with pkgs.vimPlugins; [
-                nvim-dap
-                nvim-dap-ui
-                nvim-dap-go
-                nvim-dap-virtual-text
-                nvim-dap-python
+              dap =
+                let
+                  nt = pkgs.vimPlugins.neotest-golang.overrideAttrs {
+                    src = pkgs.fetchFromGitHub {
+                      owner = "fredrikaverpil";
+                      repo = "neotest-golang";
+                      rev = "ad6ae703e18874eb66fee539224eac2dd9cc0890";
+                      sha256 = "fAnd4PFlrDjSmdtH/FwVxlUjKqAkXADh6u2QbgcBBs8=";
+                    };
+                  };
+                  n = pkgs.vimPlugins.neotest.overrideAttrs {
+                    version = "v5.9.0";
+                    src = pkgs.fetchzip {
+                      url = "https://github.com/nvim-neotest/neotest/archive/refs/tags/v5.9.0.zip";
+                      sha256 = "sk9w/tqP9JdPQX8U2Hhu7uNubk7mBpMxP9UJxhrajCQ=";
+                    };
+                  };
+                  dap-plugins = with pkgs.vimPlugins; [
+                    nvim-dap
+                    nvim-dap-ui
+                    nvim-dap-go
+                    nvim-dap-virtual-text
+                    nvim-dap-python
 
-                # Neotest requirements 
-                neotest
-                neotest-python
-                neotest-go
-                FixCursorHold-nvim
-              ];
+                    # Neotest requirements
+                    # neotest
+                    neotest-golang
+                    neotest-python
+                    FixCursorHold-nvim
+                  ];
+                in
+                [
+                  nt
+                  # n
+                ]
+                ++ dap-plugins;
               extra = with pkgs.vimPlugins; [
                 comment-nvim
                 grapple-nvim
@@ -213,7 +240,6 @@
                 friendly-snippets
                 luasnip
                 blink-cmp
-                lsp-zero-nvim
                 nvim-lspconfig
                 lazydev-nvim
                 rustaceanvim
@@ -283,6 +309,16 @@
               # your alias may not conflict with your other packages.
               aliases = [ "vim" ];
               # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+              # pins neovim version
+              neovim-unwrapped = pkgs.neovim-unwrapped.overrideAttrs {
+                version = "v0.11.4";
+                src = pkgs.fetchFromGitHub {
+                  owner = "neovim";
+                  repo = "neovim";
+                  tag = "v0.11.4";
+                  hash = "sha256-IpMHxIDpldg4FXiXPEY2E51DfO/Z5XieKdtesLna9Xw=";
+                };
+              };
             };
             # and a set of categories that you want
             # (and other information to pass to lua)

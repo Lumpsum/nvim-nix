@@ -3,6 +3,7 @@ require("lze").load {
         "nvim-treesitter",
         for_cat = "general.treesitter",
         event = "DeferredUIEnter",
+        dep_of = { "neotest" },
         load = function (name)
             vim.cmd.packadd(name)
             vim.cmd.packadd("nvim-treesitter-textobjects")

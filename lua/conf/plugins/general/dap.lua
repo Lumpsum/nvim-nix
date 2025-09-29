@@ -97,7 +97,7 @@ require("lze").load {
         end
     },
     {
-        "neotest-go",
+        "neotest-golang",
         ft = "go",
         event = "DeferredUIEnter",
         dep_of = { "neotest" },
@@ -113,7 +113,7 @@ require("lze").load {
             neotest.setup({
                 adapters = {
                     require("neotest-python"),
-                    require("neotest-go"),
+                    require("neotest-golang")({warn_test_name_dupes = false}),
                     require("rustaceanvim.neotest")
                 }
             })
