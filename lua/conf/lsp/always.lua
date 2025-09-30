@@ -154,6 +154,8 @@ require("lze").load {
 
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("gopls")
+            vim.lsp.enable("ruff")
+            vim.lsp.enable("basedpyright")
             vim.lsp.enable("terraformls")
             vim.lsp.enable("tflin")
             vim.lsp.enable("dockerls")
