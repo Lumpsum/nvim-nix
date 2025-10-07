@@ -20,3 +20,5 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.cmdheight = 0
 
+vim.opt.signcolumn = "yes:1"
+
