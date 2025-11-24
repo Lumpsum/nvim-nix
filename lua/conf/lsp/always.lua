@@ -157,7 +157,7 @@ require("lze").load {
             vim.lsp.enable("ruff")
             vim.lsp.enable("basedpyright")
             vim.lsp.enable("terraformls")
-            vim.lsp.enable("tflin")
+            vim.lsp.enable("tflint")
             vim.lsp.enable("dockerls")
             vim.lsp.enable("jsonls")
             vim.lsp.enable("nixd")
