@@ -3,10 +3,10 @@ return {
         settings = {
             lint = {
                 enable = true,
-                select = { "ALL" },
-                -- ignore = { "D", "ANN101", "ANN204" },
+                select = { "E", "F", "B" },
             },
             organizeImports = false,
+            configurationPreference = 'filesystemFirst',
         },
     },
 }

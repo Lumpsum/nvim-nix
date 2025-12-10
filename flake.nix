@@ -154,6 +154,7 @@
               ];
               custom = [
                 (pkgs.callPackage ./helm-ls.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; })
+                (pkgs.callPackage ./lazydev.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; })
                 (pkgs.callPackage ./nvim-json-graph-view.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; })
               ];
             };
@@ -241,7 +242,6 @@
                 luasnip
                 blink-cmp
                 nvim-lspconfig
-                lazydev-nvim
                 rustaceanvim
               ];
             };

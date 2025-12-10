@@ -20,8 +20,8 @@ require("lze").load {
         dep_of = { "blink.cmp" },
     },
     {
-        "lazydev.nvim",
-        for_cat = "lsp.always",
+        "lazydev",
+        for_cat = "general.always",
         event = "DeferredUIEnter",
         dep_of = { "blink.cmp" },
     },
@@ -43,7 +43,7 @@ require("lze").load {
                 },
 
                 sources = {
-                    default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+                    default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                     providers = {
                         lazydev = {
                             name = "LazyDev",
