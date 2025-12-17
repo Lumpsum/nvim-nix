@@ -20,4 +20,7 @@ end
 if nixCats("general.dap") then
     require("conf.plugins.general.dap")
 end
+if nixCats("general.ai") then
+    require("conf.plugins.general.ai")
+end
 

@@ -192,6 +192,23 @@
                 markdown-preview-nvim
                 markview-nvim
               ];
+              # ai =
+              #   let
+              #     cc = pkgs.vimPlugins.codecompanion-nvim.overrideAttrs {
+              #       src = pkgs.fetchFromGitHub {
+              #         owner = "olimorris";
+              #         repo = "codecompanion.nvim";
+              #         rev = "4677d56546f4423ca3f3456205576a5c503471e8";
+              #         hash = "sha256-Nqw8hnoOIczVNtU7Ge/5Vp7O6+uVH8zgvW1kXSVdlmw=";
+              #       };
+              #     };
+              #   in
+              #   [
+              #     cc
+              #   ];
+              ai = with pkgs.vimPlugins; [
+                codecompanion-nvim
+              ];
               dap =
                 let
                   nt = pkgs.vimPlugins.neotest-golang.overrideAttrs {
@@ -202,13 +219,13 @@
                       sha256 = "fAnd4PFlrDjSmdtH/FwVxlUjKqAkXADh6u2QbgcBBs8=";
                     };
                   };
-                  n = pkgs.vimPlugins.neotest.overrideAttrs {
-                    version = "v5.9.0";
-                    src = pkgs.fetchzip {
-                      url = "https://github.com/nvim-neotest/neotest/archive/refs/tags/v5.9.0.zip";
-                      sha256 = "sk9w/tqP9JdPQX8U2Hhu7uNubk7mBpMxP9UJxhrajCQ=";
-                    };
-                  };
+                  # n = pkgs.vimPlugins.neotest.overrideAttrs {
+                  #   version = "v5.9.0";
+                  #   src = pkgs.fetchzip {
+                  #     url = "https://github.com/nvim-neotest/neotest/archive/refs/tags/v5.9.0.zip";
+                  #     sha256 = "sk9w/tqP9JdPQX8U2Hhu7uNubk7mBpMxP9UJxhrajCQ=";
+                  #   };
+                  # };
                   dap-plugins = with pkgs.vimPlugins; [
                     nvim-dap
                     nvim-dap-ui

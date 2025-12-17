@@ -5,7 +5,7 @@ return {
                 enable = true,
                 select = { "E", "F", "B" },
             },
-            organizeImports = false,
+            organizeImports = true,
             configurationPreference = 'filesystemFirst',
         },
     },

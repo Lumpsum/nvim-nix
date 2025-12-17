@@ -22,3 +22,4 @@ vim.opt.cmdheight = 0
 
 vim.opt.signcolumn = "yes:1"
 
+vim.opt.splitright = true
