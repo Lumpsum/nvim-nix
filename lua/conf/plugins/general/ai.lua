@@ -2,10 +2,18 @@ local cat = "general.ai"
 
 require("lze").load {
     {
+        "vimplugin-codecompanion-spinner.nvim",
+        for_cat = cat,
+        event = "DeferredUIEnter",
+        dep_of = {
+            "codecompanion.nvim"
+        },
+    },
+    {
         "codecompanion.nvim",
         for_cat = cat,
         event = "DeferredUIEnter",
-        after = function(plugin)
+        after = function()
             require("codecompanion").setup({
                 strategies = {
                     chat = {
@@ -35,6 +43,11 @@ require("lze").load {
                         })
                     end,
                 },
+
+                extensions = {
+                    spinner = {},
+                },
+
                 vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "AI Chat" }),
                 vim.keymap.set({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "AI Inline" }),
             })

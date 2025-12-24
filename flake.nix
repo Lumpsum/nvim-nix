@@ -206,9 +206,19 @@
               #   [
               #     cc
               #   ];
-              ai = with pkgs.vimPlugins; [
-                codecompanion-nvim
-              ];
+              ai =
+                let
+                  spinner = (
+                    pkgs.callPackage ./codecompanion-spinner.nix { buildVimPlugin = pkgs.vimUtils.buildVimPlugin; }
+                  );
+                  plugins = with pkgs.vimPlugins; [
+                    codecompanion-nvim
+                  ];
+                in
+                [
+                  spinner
+                ]
+                ++ plugins;
               dap =
                 let
                   nt = pkgs.vimPlugins.neotest-golang.overrideAttrs {
