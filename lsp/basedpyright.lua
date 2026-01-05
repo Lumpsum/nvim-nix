@@ -1,7 +1,7 @@
 return {
     settings = {
         basedpyright = {
-            disableOrganizeImports = false,
+            disableOrganizeImports = true,
             analysis = {
                 ignore = { "*" },
             },
