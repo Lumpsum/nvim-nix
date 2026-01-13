@@ -42,6 +42,12 @@ require("lze").load {
                             },
                         })
                     end,
+
+                    openai = function ()
+                        return require("codecompanion.adapters").extend("openai", {
+                            url = "https://genai-api.eon.com/llmgw/central/openai/deployments/gpt-4.1/chat/completions?api-version=2024-03-01-preview"
+                        })
+                    end
                 },
 
                 extensions = {
