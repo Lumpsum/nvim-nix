@@ -121,16 +121,11 @@
               ripgrep
               fd
               lazygit
+              tree-sitter
             ];
             debug = with pkgs; {
               # go = [ delv ];
             };
-            # go = with pkgs; [
-            #   gopls
-            #   gotools
-            #   go-tools
-            #   gccgo
-            # ];
             # nix = with pkgs.vimPlugins; [
             #   vim-nix
             # ];
@@ -180,7 +175,7 @@
                 mini-nvim
               ];
               treesitter = with pkgs.vimPlugins; [
-                nvim-treesitter.withAllGrammars
+                nvim-treesitter
                 nvim-treesitter-textobjects
               ];
               telescope = with pkgs.vimPlugins; [
@@ -192,20 +187,6 @@
                 markdown-preview-nvim
                 markview-nvim
               ];
-              # ai =
-              #   let
-              #     cc = pkgs.vimPlugins.codecompanion-nvim.overrideAttrs {
-              #       src = pkgs.fetchFromGitHub {
-              #         owner = "olimorris";
-              #         repo = "codecompanion.nvim";
-              #         rev = "4677d56546f4423ca3f3456205576a5c503471e8";
-              #         hash = "sha256-Nqw8hnoOIczVNtU7Ge/5Vp7O6+uVH8zgvW1kXSVdlmw=";
-              #       };
-              #     };
-              #   in
-              #   [
-              #     cc
-              #   ];
               ai =
                 let
                   spinner = (
@@ -219,42 +200,19 @@
                   spinner
                 ]
                 ++ plugins;
-              dap =
-                let
-                  nt = pkgs.vimPlugins.neotest-golang.overrideAttrs {
-                    src = pkgs.fetchFromGitHub {
-                      owner = "fredrikaverpil";
-                      repo = "neotest-golang";
-                      rev = "ad6ae703e18874eb66fee539224eac2dd9cc0890";
-                      sha256 = "fAnd4PFlrDjSmdtH/FwVxlUjKqAkXADh6u2QbgcBBs8=";
-                    };
-                  };
-                  # n = pkgs.vimPlugins.neotest.overrideAttrs {
-                  #   version = "v5.9.0";
-                  #   src = pkgs.fetchzip {
-                  #     url = "https://github.com/nvim-neotest/neotest/archive/refs/tags/v5.9.0.zip";
-                  #     sha256 = "sk9w/tqP9JdPQX8U2Hhu7uNubk7mBpMxP9UJxhrajCQ=";
-                  #   };
-                  # };
-                  dap-plugins = with pkgs.vimPlugins; [
-                    nvim-dap
-                    nvim-dap-ui
-                    nvim-dap-go
-                    nvim-dap-virtual-text
-                    nvim-dap-python
+              dap = with pkgs.vimPlugins; [
+                nvim-dap
+                nvim-dap-ui
+                nvim-dap-go
+                nvim-dap-virtual-text
+                nvim-dap-python
 
-                    # Neotest requirements
-                    # neotest
-                    neotest-golang
-                    neotest-python
-                    FixCursorHold-nvim
-                  ];
-                in
-                [
-                  nt
-                  # n
-                ]
-                ++ dap-plugins;
+                # Neotest requirements
+                neotest
+                neotest-golang
+                neotest-python
+                FixCursorHold-nvim
+              ];
               extra = with pkgs.vimPlugins; [
                 comment-nvim
                 grapple-nvim

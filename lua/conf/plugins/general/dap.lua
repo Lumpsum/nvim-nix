@@ -44,13 +44,13 @@ require("lze").load {
             vim.keymap.set("n", "<leader>db", dap.step_back)
             vim.keymap.set("n", "<leader>dr", dap.restart)
 
-            vim.keymap.set("n", "<leader>dus", function ()
+            vim.keymap.set("n", "<leader>dus", function()
                 ui.toggle(1)
             end)
-            vim.keymap.set("n", "<leader>dub", function ()
+            vim.keymap.set("n", "<leader>dub", function()
                 ui.toggle(2)
             end)
-            vim.keymap.set("n", "<leader>dp", function ()
+            vim.keymap.set("n", "<leader>dp", function()
                 ui.float_element("breakpoints")
             end)
             vim.keymap.set("n", "<leader>de", ui.eval)
@@ -118,7 +118,7 @@ require("lze").load {
             neotest.setup({
                 adapters = {
                     require("neotest-python"),
-                    require("neotest-golang")({warn_test_name_dupes = false}),
+                    require("neotest-golang")({ warn_test_name_dupes = false }),
                     require("rustaceanvim.neotest")
                 }
             })
@@ -126,6 +126,8 @@ require("lze").load {
             vim.keymap.set("n", "<leader>dtr", neotest.run.run)
             vim.keymap.set("n", "<leader>dts", neotest.summary.toggle)
             vim.keymap.set("n", "<leader>dtd", function() neotest.run.run({ strategy = "dap" }) end)
+
+            log_level = vim.log.levels.DEBUG
         end
     }
 }
