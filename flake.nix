@@ -173,6 +173,7 @@
               always = with pkgs.vimPlugins; [
                 lualine-nvim
                 mini-nvim
+                snacks-nvim
               ];
               treesitter = with pkgs.vimPlugins; [
                 nvim-treesitter
@@ -194,6 +195,7 @@
                   );
                   plugins = with pkgs.vimPlugins; [
                     codecompanion-nvim
+                    claudecode-nvim
                   ];
                 in
                 [

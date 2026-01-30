@@ -26,6 +26,12 @@ require("lze").load {
         dep_of = { "blink.cmp" },
     },
     {
+        "snacks.nvim",
+        for_cat = "general.always",
+        event = "DeferredUIEnter",
+        dep_of = { "claudecode.nvim" },
+    },
+    {
         "blink.cmp",
         for_cat = "lsp.always",
         event = "DeferredUIEnter",
