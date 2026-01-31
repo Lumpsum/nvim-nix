@@ -122,6 +122,7 @@
               fd
               lazygit
               tree-sitter
+              claude-code-acp
             ];
             debug = with pkgs; {
               # go = [ delv ];
