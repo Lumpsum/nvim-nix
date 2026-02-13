@@ -117,13 +117,29 @@
           # at RUN TIME for plugins. Will be available to PATH within neovim terminal
           # this includes LSPs
           lspsAndRuntimeDeps = {
-            general = with pkgs; [
-              ripgrep
-              fd
-              lazygit
-              tree-sitter
-              claude-code-acp
-            ];
+            general =
+              let
+                ts = pkgs.tree-sitter.overrideAttrs (old: {
+                  version = "0.26.1";
+                  src = pkgs.fetchFromGitHub {
+                    owner = "tree-sitter";
+                    repo = "tree-sitter";
+                    rev = "v0.26.1";
+                    hash = "sha256-k8X2qtxUne8C6znYAKeb4zoBf+vffmcJZQHUmBvsilA=";
+                  };
+                });
+              in
+              with pkgs;
+              [
+                ripgrep
+                fd
+                lazygit
+                tree-sitter
+                claude-code-acp
+              ]
+              ++ [
+                # ts
+              ];
             debug = with pkgs; {
               # go = [ delv ];
             };
@@ -176,10 +192,27 @@
                 mini-nvim
                 snacks-nvim
               ];
-              treesitter = with pkgs.vimPlugins; [
-                nvim-treesitter
-                nvim-treesitter-textobjects
-              ];
+              treesitter =
+                let
+                  nvim-ts = pkgs.vimPlugins.nvim-treesitter.overrideAttrs (old: {
+                    version = "511e5cc";
+                    src = pkgs.fetchFromGitHub {
+                      owner = "nvim-treesitter";
+                      repo = "nvim-treesitter";
+                      rev = "511e5ccf404f8a96ee31866b079fca033a8a7c4e"; # or specific commit
+                      hash = "sha256-yG05U72ane6OoNqKmpIw0qwlN2OcQnD8vwIrcZ2d5+c=";
+                    };
+
+                  });
+                in
+                with pkgs.vimPlugins;
+                [
+                  # nvim-treesitter
+                  nvim-treesitter-textobjects
+                ]
+                ++ [
+                    nvim-ts
+                ];
               telescope = with pkgs.vimPlugins; [
                 telescope-fzf-native-nvim
                 telescope-ui-select-nvim
@@ -360,7 +393,7 @@
             name = defaultPackageName;
             packages = [ defaultPackage ];
             inputsFrom = [ ];
-            shellHook = '''';
+            shellHook = "";
           };
         };
 
