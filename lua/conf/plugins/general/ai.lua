@@ -1,4 +1,5 @@
 local cat = "general.ai"
+local adapter = nixCats("adapter")
 
 require("lze").load {
     {
@@ -17,12 +18,9 @@ require("lze").load {
             require("codecompanion").setup({
                 strategies = {
                     chat = {
-                        adapter = {
-                            name = "gemini",
-                            model = "gemini-2.5-flash"
-                        },
+                        adapter = adapter,
                     },
-                    inline = { adapter = "gemini", },
+                    inline = { adapter = adapter, },
                     -- cmd = {},
                     -- background = {},
                 },
@@ -38,7 +36,8 @@ require("lze").load {
                     gemini = function()
                         return require("codecompanion.adapters").extend("gemini", {
                             defaults = {
-                                auth_method = "gemini-api-key"
+                                auth_method = "gemini-api-key",
+                                model = "gemini-2.5-flash",
                             },
                         })
                     end,
