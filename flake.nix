@@ -254,6 +254,7 @@
                 grapple-nvim
                 lazygit-nvim
                 gitsigns-nvim
+                diffview-nvim
                 todo-comments-nvim
               ];
             };
@@ -350,7 +351,8 @@
               neonixdev = true;
               dapRegular = true;
               themer = true;
-              colorscheme = "gruvbox";
+              colorscheme = "kanagawa";
+              adapter = "claude_code";
             };
           };
       };

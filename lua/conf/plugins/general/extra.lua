@@ -122,4 +122,12 @@ require("lze").load {
             require("json_graph_view")
         end
     },
+    {
+        "diffview.nvim",
+        for_cat = cat,
+        event = "DeferredUIEnter",
+        after = function(plugin)
+            require("diffview").setup()
+        end
+    },
 }
