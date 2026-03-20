@@ -179,6 +179,7 @@
                   buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
                 };
                 "gruvbox" = pkgs.vimPlugins.gruvbox;
+                "catppuccin" = pkgs.vimPlugins.catppuccin-nvim;
               }
             );
           };
@@ -351,7 +352,7 @@
               neonixdev = true;
               dapRegular = true;
               themer = true;
-              colorscheme = "kanagawa";
+              colorscheme = "catppuccin";
               adapter = "claude_code";
             };
           };
