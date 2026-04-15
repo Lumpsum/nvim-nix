@@ -120,12 +120,12 @@
             general =
               let
                 ts = pkgs.tree-sitter.overrideAttrs (old: {
-                  version = "0.26.1";
+                  version = "1";
                   src = pkgs.fetchFromGitHub {
                     owner = "tree-sitter";
                     repo = "tree-sitter";
-                    rev = "v0.26.1";
-                    hash = "sha256-k8X2qtxUne8C6znYAKeb4zoBf+vffmcJZQHUmBvsilA=";
+                    rev = "c82bf96f0a773d85304feeb695e1e23b2207ac35";
+                    hash = "";
                   };
                 });
               in
@@ -136,6 +136,7 @@
                 lazygit
                 tree-sitter
                 claude-code-acp
+                gcc
               ]
               ++ [
                 # ts
@@ -334,12 +335,12 @@
               # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
               # pins neovim version
               neovim-unwrapped = pkgs.neovim-unwrapped.overrideAttrs {
-                version = "v0.11.4";
+                version = "v0.12.1";
                 src = pkgs.fetchFromGitHub {
                   owner = "neovim";
                   repo = "neovim";
-                  tag = "v0.11.4";
-                  hash = "sha256-IpMHxIDpldg4FXiXPEY2E51DfO/Z5XieKdtesLna9Xw=";
+                  tag = "v0.12.1";
+                  hash = "sha256-cbFM5TKGmhEDsdhMvGzMyn0Js0MJwdMwXDkzQcdw/TM=";
                 };
               };
             };
