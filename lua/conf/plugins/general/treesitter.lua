@@ -11,54 +11,6 @@ require("lze").load {
         end,
         after = function(plugin)
             local ts = require("nvim-treesitter")
-            -- ts.install({
-            --     'bash',
-            --     'comment',
-            --     'css',
-            --     'diff',
-            --     'fish',
-            --     'git_config',
-            --     'git_rebase',
-            --     'gitcommit',
-            --     'gitignore',
-            --     'html',
-            --     'javascript',
-            --     'json',
-            --     'latex',
-            --     'lua',
-            --     'luadoc',
-            --     'make',
-            --     'markdown',
-            --     'markdown_inline',
-            --     'python',
-            --     'query',
-            --     'regex',
-            --     'scss',
-            --     'svelte',
-            --     'toml',
-            --     'tsx',
-            --     'go',
-            --     'rust',
-            --     'typescript',
-            --     'typst',
-            --     'vim',
-            --     'vimdoc',
-            --     'vue',
-            --     'xml', }):wait(300000)
-
-            -- vim.api.nvim_create_autocmd("FileType", {
-            --     pattern = "*",
-            --     callback = function()
-            --         pcall(vim.treesitter.start)
-            --     end,
-            -- })
-
-            -- vim.api.nvim_create_autocmd("FileType", {
-            --     callback = function(details)
-            --         vim.bo[details.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-            --     end,
-            -- })
-
             local parsers_loaded = {}
             local parsers_pending = {}
             local parsers_failed = {}
@@ -99,6 +51,7 @@ require("lze").load {
                 'snacks_dashboard',
                 'snacks_notif',
                 'snacks_win',
+                'oil',
             }
 
 
