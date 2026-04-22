@@ -23,11 +23,8 @@ require("lze").load {
                 -- },
                 pickers = {
                     find_files = {
-                        -- hidden = true,
-                        -- no_ignore = true,
-                        --         find_files = {
-                        --             theme = "dropdown"
-                        --         }
+                        hidden = true,
+                        file_ignore_patterns = { "^%.git/", "^%.git$" },
                     }
                 },
                 extensions = {
