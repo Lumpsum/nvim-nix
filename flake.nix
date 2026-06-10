@@ -58,7 +58,10 @@
       # will not apply to module imports
       # as that will have your system values
       extra_pkg_config = {
-        # allowUnfree = true;
+        allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+          "claude-code"
+          "claude-code-acp"
+        ];
       };
 
       # management of the system variable is one of the harder parts of using flakes.
@@ -135,7 +138,7 @@
                 fd
                 lazygit
                 tree-sitter
-                claude-code-acp
+                claude-agent-acp
                 gcc
               ]
               ++ [
@@ -258,6 +261,11 @@
                 gitsigns-nvim
                 diffview-nvim
                 todo-comments-nvim
+              ];
+              db = with pkgs.vimPlugins; [
+                vim-dadbod
+                vim-dadbod-completion
+                vim-dadbod-ui
               ];
             };
             lsp = {

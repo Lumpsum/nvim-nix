@@ -115,12 +115,19 @@ require("lze").load {
         event = "DeferredUIEnter",
         after = function(plugin)
             local neotest = require("neotest")
+
+            local adapters = {}
+            if vim.fn.executable("go") == 1 then
+                table.insert(adapters, require("neotest-golang")({ warn_test_name_dupes = false }))
+            end
+            if vim.fn.executable("python") == 1 then
+                table.insert(adapters, require("neotest-python"))
+            end
+            if vim.fn.executable("cargo") == 1 then
+                table.insert(adapters, require("rustaceanvim.neotest"))
+            end
             neotest.setup({
-                adapters = {
-                    require("neotest-python"),
-                    require("neotest-golang")({ warn_test_name_dupes = false }),
-                    require("rustaceanvim.neotest")
-                }
+                adapters = adapters,
             })
 
             vim.keymap.set("n", "<leader>dtr", neotest.run.run)

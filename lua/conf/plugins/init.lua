@@ -23,4 +23,7 @@ end
 if nixCats("general.ai") then
     require("conf.plugins.general.ai")
 end
+if nixCats("general.db") then
+    require("conf.plugins.general.db")
+end
 
